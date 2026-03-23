@@ -142,6 +142,32 @@ section { padding: 6rem 2rem; }
   margin-bottom: 3rem;
 }
 
+.gallery-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.gallery-large {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.gallery-large img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.5s ease;
+  filter: brightness(0.82);
+}
+
+.gallery-large:hover img {
+  filter: brightness(0.95);
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -322,6 +348,7 @@ footer .footer-links span { margin: 0 0.8rem; }
 @media (max-width: 420px) {
   .gallery-grid { grid-template-columns: 1fr; }
   .gallery-item.portrait { grid-row: span 1; aspect-ratio: 3/4; }
+  .gallery-large img { max-height: 45vh; }
 }
 </style>
 </head>
@@ -357,49 +384,70 @@ footer .footer-links span { margin: 0 0.8rem; }
 <section class="gallery" id="gallery">
   <div class="container-wide">
     <p class="section-label">Gallery</p>
-    <div class="gallery-grid">
-      <!-- Exterior & landscape -->
-      <div class="gallery-item"><img src="photos/IMG_9283.jpeg" alt="House exterior with gardens and cork oaks" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9766.jpeg" alt="Front entrance with board-formed concrete walls and agave plantings" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9274.jpeg" alt="Concrete staircase framing views of forested hills" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9713.jpeg" alt="Concrete volumes and corten steel stairs amid rosemary and lavender" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9721.jpeg" alt="Concrete wall with dappled oak tree shadows" loading="lazy"></div>
-      <!-- Living spaces -->
-      <div class="gallery-item"><img src="photos/IMG_9517.jpeg" alt="Living room with Togo sofas and panoramic glass walls to the hills" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9521.jpeg" alt="Living space with window seat and landscape beyond" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9803.jpeg" alt="Kitchen and dining area with PH5 lamp and curated shelving" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9792.jpeg" alt="Kitchen with marble island and backlit marble splashback" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9840.jpeg" alt="PH5 pendant lamp illuminating oak dining table" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9598.jpeg" alt="Curated shelves with ceramics, books, and collected objects" loading="lazy"></div>
-      <!-- Bedrooms & interior -->
-      <div class="gallery-item"><img src="photos/IMG_9265 (1).jpeg" alt="Bedroom in warm wood with courtyard window" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9691.jpeg" alt="Main bedroom with patterned throw and garden window" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9806.jpeg" alt="Twin bedroom alcove in warm wood" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9655.jpeg" alt="Bathroom with handmade tiles and rainfall shower" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9267 (1).jpeg" alt="Hallway with terracotta tiles and natural light" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9675.jpeg" alt="Corridor with dark tiles and walnut bench" loading="lazy"></div>
-      <!-- Architecture & grounds -->
-      <div class="gallery-item"><img src="photos/IMG_9268.jpeg" alt="Concrete entry pavilion with courtyard garden" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9271 (1).jpeg" alt="Marble bench and board-formed concrete wall beneath oak canopy" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9282 (1).jpeg" alt="Cork oak shading path along concrete wall" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9705.jpeg" alt="Concrete facade with terracotta succulent pots" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9709.jpeg" alt="Corten steel steps through herb garden to rooftop" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9717.jpeg" alt="Concrete tower and oak trees against golden hour sky" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9742.jpeg" alt="Covered terrace with lounge chair overlooking the grounds" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9410.jpeg" alt="Interior courtyard with acapulco chairs and climbing vines" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9698.jpeg" alt="Courtyard garden with gravel and young tree" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9681.jpeg" alt="Bedroom entrance and corridor with dark tiles" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9756.jpeg" alt="Shaded path along concrete wall under cork oaks" loading="lazy"></div>
-      <!-- Landscape -->
-      <div class="gallery-item"><img src="photos/IMG_9581.jpeg" alt="Terrace with concrete walls framing the Alentejo hills" loading="lazy"></div>
-      <div class="gallery-item portrait"><img src="photos/IMG_9272.jpeg" alt="Concrete staircase and ferns framing forested hillside" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9451.jpeg" alt="Green roof with Starlink and forest canopy views" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/IMG_9748.jpeg" alt="Estate trail through pines and oaks at sunset" loading="lazy"></div>
+    <div class="gallery-flow">
 
-      <div class="gallery-item"><img src="photos/IMG_9819.jpeg" alt="House exterior at dusk with warm interior glow" loading="lazy"></div>
-      <!-- Grounds & nature -->
-      <div class="gallery-item"><img src="photos/20210827_070924.jpg" alt="Morning mist drifting through cork oaks and maritime pines at dawn" loading="lazy"></div>
-      <div class="gallery-item"><img src="photos/20210827_073218.jpg" alt="Sunrise view over misty Alentejo hills from the estate" loading="lazy"></div>
+      <!-- EXTERIOR APPROACH -->
+      <div class="gallery-large"><img src="photos/IMG_9285.jpeg" alt="House from hillside approach among cork oaks and forested hills" loading="lazy"></div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="photos/IMG_9283.jpeg" alt="House exterior with gardens and cork oaks" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9766.jpeg" alt="Front entrance with board-formed concrete walls and agave plantings" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9274.jpeg" alt="Concrete staircase framing views of forested hills" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9276.jpeg" alt="Glass pavilion exterior with sliding doors open to garden" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9713.jpeg" alt="Concrete volumes and corten steel stairs amid rosemary and lavender" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9721.jpeg" alt="Concrete wall with dappled oak tree shadows" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9268.jpeg" alt="Concrete entry pavilion with courtyard garden" loading="lazy"></div>
+      </div>
+
+      <!-- INTERIOR LIVING -->
+      <div class="gallery-large"><img src="photos/IMG_9278.jpeg" alt="Panoramic window interior with cork oak and Alentejo hills beyond" loading="lazy"></div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="photos/IMG_9517.jpeg" alt="Living room with Togo sofas and panoramic glass walls to the hills" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9521.jpeg" alt="Living space with window seat and landscape beyond" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9803.jpeg" alt="Kitchen and dining area with PH5 lamp and curated shelving" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9792.jpeg" alt="Kitchen with marble island and backlit marble splashback" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9840.jpeg" alt="PH5 pendant lamp illuminating oak dining table" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9598.jpeg" alt="Curated shelves with ceramics, books, and collected objects" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9581.jpeg" alt="Terrace with concrete walls framing the Alentejo hills" loading="lazy"></div>
+      </div>
+
+      <!-- BEDROOMS -->
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="photos/IMG_9265 (1).jpeg" alt="Bedroom in warm wood with courtyard window" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9691.jpeg" alt="Main bedroom with patterned throw and garden window" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9806.jpeg" alt="Twin bedroom alcove in warm wood" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9655.jpeg" alt="Bathroom with handmade tiles and rainfall shower" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9267 (1).jpeg" alt="Hallway with terracotta tiles and natural light" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9675.jpeg" alt="Corridor with dark tiles and walnut bench" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9681.jpeg" alt="Bedroom entrance and corridor with dark tiles" loading="lazy"></div>
+      </div>
+
+      <!-- GROUNDS & GARDEN -->
+      <div class="gallery-large"><img src="photos/20210510_185845.jpg" alt="Aerial view of house set among cork oaks and maritime pines" loading="lazy"></div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item portrait"><img src="photos/IMG_9271 (1).jpeg" alt="Marble bench and board-formed concrete wall beneath oak canopy" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9282 (1).jpeg" alt="Cork oak shading path along concrete wall" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9705.jpeg" alt="Concrete facade with terracotta succulent pots" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9709.jpeg" alt="Corten steel steps through herb garden to rooftop" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9742.jpeg" alt="Covered terrace with lounge chair overlooking the grounds" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9410.jpeg" alt="Interior courtyard with acapulco chairs and climbing vines" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9698.jpeg" alt="Courtyard garden with gravel and young tree" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9756.jpeg" alt="Shaded path along concrete wall under cork oaks" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9451.jpeg" alt="Green roof with Starlink and forest canopy views" loading="lazy"></div>
+      </div>
+
+      <!-- VIEWS & LANDSCAPE -->
+      <div class="gallery-large"><img src="photos/20210827_073218.jpg" alt="Sunrise view over misty Alentejo hills from the estate" loading="lazy"></div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item portrait"><img src="photos/IMG_9272.jpeg" alt="Concrete staircase and ferns framing forested hillside" loading="lazy"></div>
+        <div class="gallery-item portrait"><img src="photos/IMG_9717.jpeg" alt="Concrete tower and oak trees against golden hour sky" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9748.jpeg" alt="Estate trail through pines and oaks at sunset" loading="lazy"></div>
+        <div class="gallery-item"><img src="photos/IMG_9819.jpeg" alt="House exterior at dusk with warm interior glow" loading="lazy"></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -447,7 +495,7 @@ footer .footer-links span { margin: 0 0.8rem; }
   var lb = document.getElementById('lightbox');
   var lbImg = lb.querySelector('img');
   var counter = lb.querySelector('.lightbox-counter');
-  var items = Array.from(document.querySelectorAll('.gallery-item img'));
+  var items = Array.from(document.querySelectorAll('.gallery-large img, .gallery-item img'));
   var idx = 0;
 
   function show(i) {
@@ -465,7 +513,8 @@ footer .footer-links span { margin: 0 0.8rem; }
   }
 
   items.forEach(function(img, i) {
-    img.parentElement.addEventListener('click', function() { show(i); });
+    var target = img.closest('.gallery-large') || img.closest('.gallery-item');
+    target.addEventListener('click', function() { show(i); });
   });
 
   lb.querySelector('.lightbox-close').addEventListener('click', hide);
