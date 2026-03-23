@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinheiros Bravos — Alentejo, Portugal</title>
+<meta name="description" content="A secluded quinta set on 4.5 hectares of cork oaks and maritime pines in the Alentejo, Portugal. Designed by architect Jos&eacute; Neves.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1a1a18;
+  --bg-light: #222220;
+  --cream: #f5f0eb;
+  --cream-muted: #c8c0b6;
+  --accent: #a89279;
+  --accent-light: #c4ad8f;
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- HERO ---- */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  filter: brightness(0.5) saturate(0.9);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  letter-spacing: 0.1em;
+  line-height: 1.15;
+  color: var(--cream);
+  text-transform: uppercase;
+}
+
+.hero .subtitle {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--cream-muted);
+  margin-top: 0.8rem;
+  letter-spacing: 0.18em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0.4;
+  animation: drift 2.8s ease-in-out infinite;
+}
+
+.scroll-hint span {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: var(--cream);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.15; }
+}
+
+/* ---- SECTIONS ---- */
+section { padding: 6rem 2rem; }
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.container-wide {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+}
+
+/* ---- ABOUT ---- */
+.about p {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--cream-muted);
+  margin-bottom: 1.5rem;
+}
+
+.about p:last-of-type { margin-bottom: 0; }
+
+/* ---- DIVIDER IMAGE ---- */
+.divider-image {
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.divider-image img {
+  width: 100%;
+  height: 55vh;
+  min-height: 320px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75);
+}
+
+/* ---- GALLERY ---- */
+.gallery {
+  background: var(--bg-light);
+}
+
+.gallery .section-label {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 4/3;
+}
+
+.gallery-item.portrait {
+  aspect-ratio: 3/4;
+  grid-row: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  display: block;
+  filter: brightness(0.82);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.95);
+}
+
+/* ---- LIGHTBOX ---- */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(8, 8, 6, 0.96);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 92vw;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--cream-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  z-index: 1001;
+}
+
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--cream-muted);
+  font-size: 2.8rem;
+  cursor: pointer;
+  padding: 1rem;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  font-family: var(--serif);
+  z-index: 1001;
+}
+
+.lightbox-nav:hover { opacity: 1; }
+.lightbox-prev { left: 0.5rem; }
+.lightbox-next { right: 0.5rem; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--cream-muted);
+  opacity: 0.4;
+  letter-spacing: 0.15em;
+}
+
+/* ---- DETAILS ---- */
+.details-list {
+  list-style: none;
+  columns: 2;
+  column-gap: 3rem;
+}
+
+.details-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(168, 146, 121, 0.12);
+  font-size: 0.95rem;
+  color: var(--cream-muted);
+  break-inside: avoid;
+  letter-spacing: 0.01em;
+}
+
+/* ---- FOOTER ---- */
+footer {
+  padding: 4.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(168, 146, 121, 0.1);
+}
+
+footer .inquiries {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--cream-muted);
+}
+
+footer .inquiries a {
+  color: var(--accent-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196, 173, 143, 0.25);
+  transition: border-color 0.3s;
+}
+
+footer .inquiries a:hover { border-color: var(--accent-light); }
+
+footer .footer-links {
+  margin-top: 2.5rem;
+  font-size: 0.75rem;
+  color: rgba(200, 192, 182, 0.3);
+  letter-spacing: 0.05em;
+}
+
+footer .footer-links a {
+  color: rgba(200, 192, 182, 0.3);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer .footer-links a:hover { color: var(--cream-muted); }
+footer .footer-links span { margin: 0 0.8rem; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .details-list { columns: 1; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 4rem 1.5rem; }
+  .hero h1 { letter-spacing: 0.05em; }
+  .gallery-grid { gap: 3px; }
+  .lightbox-nav { font-size: 2rem; padding: 0.6rem; }
+  .lightbox-prev { left: 0.3rem; }
+  .lightbox-next { right: 0.3rem; }
+}
+
+@media (max-width: 420px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.portrait { grid-row: span 1; aspect-ratio: 3/4; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="photos/IMG_9285.jpeg" alt="Pinheiros Bravos house nestled among cork oaks in the Alentejo hills">
+  <div class="hero-content">
+    <h1>Pinheiros Bravos</h1>
+    <p class="subtitle">Alentejo, Portugal</p>
+  </div>
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <p class="section-label">The Property</p>
+    <p>Pinheiros Bravos is a secluded quinta set on 4.5 hectares of cork oaks and maritime pines in the rolling hills of the Alentejo, 10 km from the wild beaches of Melides and 75 minutes from Lisbon.</p>
+    <p>Designed by architect Jos&eacute; Neves and completed in 2020, the house sits lightly in its landscape&thinsp;&mdash;&thinsp;three bedrooms, a large living and dining space that opens radically to the outdoors, and a rooftop hot tub looking out over nothing but forest canopy and sky.</p>
+    <p>The owners are Lisbon-based scientists whose work blurs the line between art and research. That sensibility runs through the property: lovingly shaped grounds that include orchards, herb and flower gardens, a natural freshwater pond, and kilometres of walking trails winding through the estate and into the surrounding hills.</p>
+    <p>Comfortable year-round&thinsp;&mdash;&thinsp;radiant floor heating in winter, thick stone walls and shade in summer. High-speed Starlink, EV charging, and photovoltaic power with battery storage. The village of Melides (5&nbsp;km) has groceries, restaurants, and access to several unspoiled Atlantic beaches. Cleaning and meal preparation available on request.</p>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider-image">
+  <img src="photos/IMG_9548.jpg" alt="Living room with Togo sofas opening through floor-to-ceiling glass to the landscape" loading="lazy">
+</div>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container-wide">
+    <p class="section-label">Gallery</p>
+    <div class="gallery-grid">
+      <!-- Exterior & landscape -->
+      <div class="gallery-item"><img src="photos/IMG_9283.jpeg" alt="House exterior with gardens and cork oaks" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9766.jpeg" alt="Front entrance with board-formed concrete walls and agave plantings" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9274.jpeg" alt="Concrete staircase framing views of forested hills" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9713.jpeg" alt="Concrete volumes and corten steel stairs amid rosemary and lavender" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9721.jpeg" alt="Concrete wall with dappled oak tree shadows" loading="lazy"></div>
+      <!-- Living spaces -->
+      <div class="gallery-item"><img src="photos/IMG_9517.jpeg" alt="Living room with Togo sofas and panoramic glass walls to the hills" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9521.jpeg" alt="Living space with window seat and landscape beyond" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9803.jpeg" alt="Kitchen and dining area with PH5 lamp and curated shelving" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9792.jpeg" alt="Kitchen with marble island and backlit marble splashback" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9840.jpeg" alt="PH5 pendant lamp illuminating oak dining table" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9598.jpeg" alt="Curated shelves with ceramics, books, and collected objects" loading="lazy"></div>
+      <!-- Bedrooms & interior -->
+      <div class="gallery-item"><img src="photos/IMG_9265 (1).jpeg" alt="Bedroom in warm wood with courtyard window" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9691.jpeg" alt="Main bedroom with patterned throw and garden window" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9806.jpeg" alt="Twin bedroom alcove in warm wood" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9655.jpeg" alt="Bathroom with handmade tiles and rainfall shower" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9267 (1).jpeg" alt="Hallway with terracotta tiles and natural light" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9675.jpeg" alt="Corridor with dark tiles and walnut bench" loading="lazy"></div>
+      <!-- Architecture & grounds -->
+      <div class="gallery-item"><img src="photos/IMG_9268.jpeg" alt="Concrete entry pavilion with courtyard garden" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9271 (1).jpeg" alt="Marble bench and board-formed concrete wall beneath oak canopy" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9282 (1).jpeg" alt="Cork oak shading path along concrete wall" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9705.jpeg" alt="Concrete facade with terracotta succulent pots" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9709.jpeg" alt="Corten steel steps through herb garden to rooftop" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9717.jpeg" alt="Concrete tower and oak trees against golden hour sky" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9742.jpeg" alt="Covered terrace with lounge chair overlooking the grounds" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9410.jpeg" alt="Interior courtyard with acapulco chairs and climbing vines" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9698.jpeg" alt="Courtyard garden with gravel and young tree" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9681.jpeg" alt="Bedroom entrance and corridor with dark tiles" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9756.jpeg" alt="Shaded path along concrete wall under cork oaks" loading="lazy"></div>
+      <!-- Landscape -->
+      <div class="gallery-item"><img src="photos/IMG_9581.jpeg" alt="Terrace with concrete walls framing the Alentejo hills" loading="lazy"></div>
+      <div class="gallery-item portrait"><img src="photos/IMG_9272.jpeg" alt="Concrete staircase and ferns framing forested hillside" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9451.jpeg" alt="Green roof with Starlink and forest canopy views" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9748.jpeg" alt="Estate trail through pines and oaks at sunset" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/outside.jpg" alt="Rolling hills of maritime pines and cork oaks" loading="lazy"></div>
+      <div class="gallery-item"><img src="photos/IMG_9819.jpeg" alt="House exterior at dusk with warm interior glow" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="details" id="details">
+  <div class="container">
+    <p class="section-label">Details</p>
+    <ul class="details-list">
+      <li>3 Bedrooms</li>
+      <li>4.5 hectares of private grounds</li>
+      <li>75 min from Lisbon</li>
+      <li>10 km from Melides beaches</li>
+      <li>Rooftop wood-fired hot tub</li>
+      <li>Radiant floor heating</li>
+      <li>High-speed Starlink internet</li>
+      <li>EV charging</li>
+      <li>Solar power with battery storage</li>
+      <li>Cleaning and meal preparation available</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="inquiries">For inquiries: <a href="mailto:zach@zmainen.org">zach@zmainen.org</a></p>
+  <div class="footer-links">
+    <a href="https://mainenlab.org" target="_blank" rel="noopener">mainenlab.org</a>
+    <span>&middot;</span>
+    <a href="https://latentstates.org" target="_blank" rel="noopener">latentstates.org</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+  <img src="" alt="">
+  <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+  <div class="lightbox-counter"></div>
+</div>
+
+<script>
+(function() {
+  var lb = document.getElementById('lightbox');
+  var lbImg = lb.querySelector('img');
+  var counter = lb.querySelector('.lightbox-counter');
+  var items = Array.from(document.querySelectorAll('.gallery-item img'));
+  var idx = 0;
+
+  function show(i) {
+    idx = (i + items.length) % items.length;
+    lbImg.src = items[idx].src;
+    lbImg.alt = items[idx].alt;
+    counter.textContent = (idx + 1) + ' / ' + items.length;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hide() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  items.forEach(function(img, i) {
+    img.parentElement.addEventListener('click', function() { show(i); });
+  });
+
+  lb.querySelector('.lightbox-close').addEventListener('click', hide);
+  lb.querySelector('.lightbox-prev').addEventListener('click', function(e) {
+    e.stopPropagation(); show(idx - 1);
+  });
+  lb.querySelector('.lightbox-next').addEventListener('click', function(e) {
+    e.stopPropagation(); show(idx + 1);
+  });
+
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) hide();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') hide();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
+
+  var touchX = 0;
+  lb.addEventListener('touchstart', function(e) {
+    touchX = e.changedTouches[0].screenX;
+  }, {passive: true});
+  lb.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].screenX - touchX;
+    if (Math.abs(dx) > 50) dx > 0 ? show(idx - 1) : show(idx + 1);
+  }, {passive: true});
+})();
+</script>
+
+</body>
+</html>
